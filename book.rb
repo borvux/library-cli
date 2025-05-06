@@ -3,7 +3,8 @@
 require "active_support/all"
 
 class Book
-  attr_accessor :title, :author, :checked_out
+  attr_accessor :title, :author
+  attr_reader :checked_out
 
   def initialize(title, author, checked_out = false)
     self.title = title
