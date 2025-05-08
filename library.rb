@@ -3,39 +3,39 @@
 require_relative "audiobook"
 
 class Library
-  attr_reader :books
-  
-  def initialize(books = [])
-    @books = books
+  attr_reader :items
+
+  def initialize(items = [])
+    @items = items
   end
 
-  def add_book(book) 
-    @books.push(book)
+  def add_item(item)
+    @items.push(item)
   end
 
-  def check_out_book(title)
-    book = self.search_by_title(title)
+  def check_out_item(title)
+    item = self.search_by_title(title)
 
-    if book.nil? 
-      raise "Book not found"
-    else 
-      book.check_out
+    if item.nil?
+      raise "Item not found"
+    else
+      item.check_out
     end
   end
-  
-  def return_book(title)
-    book = self.search_by_title(title)
-      
-    if book.nil? 
-      raise "Book not found" 
-    else 
-      book.return
+
+  def return_item(title)
+    item = self.search_by_title(title)
+
+    if item.nil?
+      raise "Item not found"
+    else
+      item.return
     end
   end
 
   private
 
   def search_by_title(title)
-    @books.find { |book| book.title == title }
+    @items.find { |item| item.title == title }
   end
 end

@@ -17,19 +17,19 @@ class Audiobook < Book
   end
 
   def duration=(input)
-    @duration = input.to_i
-    raise "Duration must be greater than 0" unless @duration > 0
+    raise "Duration must be greater than 0" unless input.positive?
+    @duration = input
   end
 
   def formatted_duration
-    total_minutes = @duration.to_i
+    total_minutes = @duration
     hours = total_minutes / 60
     minutes = total_minutes % 60
 
     if hours < 1
-      "#{minutes} minutes"
+      "#{minutes} #{"minute".pluralize(minutes)}"
     else
-      "#{hours} hours and #{minutes} minutes"
+      "#{hours} #{"hour".pluralize(hours)} and #{minutes} #{"minute".pluralize(minutes)}"
     end
   end
 

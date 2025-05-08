@@ -25,7 +25,7 @@ class LibraryCli
       when "4"
         checkout()
       when "5"
-        return_book()
+        return_item()
       when "6"
         break
       else
@@ -40,8 +40,8 @@ class LibraryCli
   def add_sample_data
     book1 = Book.new("How To Learn Math", "Barbara Oakley")
     audiobook1 = Audiobook.new("The Cat In The Hat", "Dr. Seuss", "Kelsey Grammer", 11)
-    @library.add_book(book1)
-    @library.add_book(audiobook1)
+    @library.add_item(book1)
+    @library.add_item(audiobook1)
   end
 
   private
@@ -72,7 +72,7 @@ class LibraryCli
   def add_new_book()
     title, author = adding("book")
     new_book = Book.new(title, author)
-    @library.add_book(new_book)
+    @library.add_item(new_book)
     puts "#{title} is sucessfully added"
   rescue => e
     puts "Error: #{e}"
@@ -81,9 +81,9 @@ class LibraryCli
   def add_new_audiobook()
     title, author = adding("AudioBook")
     narrator = get_user_input("Enter Narrator: ")
-    duration = get_user_input("Enter Duration (in minutes): ")
+    duration = get_user_input("Enter Duration (in minutes): ").to_i
     new_audiobook = Audiobook.new(title, author, narrator, duration)
-    @library.add_book(new_audiobook)
+    @library.add_item(new_audiobook)
     puts "#{title} is successfully added"
   rescue => e
     puts "Error: #{e}"
@@ -92,16 +92,16 @@ class LibraryCli
   def checkout()
     puts "-- Check Out Item --"
     title = get_user_input("Enter title to check out: ")
-    @library.check_out_book(title)
+    @library.check_out_item(title)
     puts "#{title} is now checked out"
   rescue => e
     puts "Error: #{e}"
   end
 
-  def return_book()
+  def return_item()
     puts "-- Return Item --"
     title = get_user_input("Enter title to return: ")
-    @library.return_book(title)
+    @library.return_item(title)
     puts "#{title} is successfully returned"
   rescue => e
     puts "Error: #{e}"
